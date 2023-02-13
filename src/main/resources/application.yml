@@ -1,7 +1,9 @@
 server:
   port: 80
 
-
+openai:
+  apikey: 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
+  
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

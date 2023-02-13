@@ -23,7 +23,7 @@ import org.xml.sax.InputSource;
  *
  * 提供提取消息格式中的密文及生成回复消息格式的接口.
  */
-class XMLParse {
+public class XMLParse {
 
 	/**
 	 * 提取出xml数据包中的加密消息
@@ -67,6 +67,28 @@ class XMLParse {
 				+ "<MsgSignature><![CDATA[%2$s]]></MsgSignature>\n"
 				+ "<TimeStamp>%3$s</TimeStamp>\n" + "<Nonce><![CDATA[%4$s]]></Nonce>\n" + "</xml>";
 		return String.format(format, encrypt, signature, timestamp, nonce);
+
+	}
+	
+	
+	/**
+	 * 被动回复
+	 * 生成文本xml消息
+	 * @param toUserName 接收方帐号(收到的OpenID)
+	 * @param fromUserName 开发者微信号
+	 * @param createTime 消息创建时间
+	 * @param content 回复的消息内容
+	 * @return
+	 */
+	public static String generateOvertTextXml(String toUserName,String fromUserName,String createTime,String content) {
+		String format = "<xml>"
+					+ "<ToUserName><![CDATA[%s]]></ToUserName>"
+					+ "<FromUserName><![CDATA[%s]]></FromUserName>"
+					+ "<CreateTime>%s</CreateTime>"
+					+ "<MsgType><![CDATA[text]]></MsgType>"
+					+ "<Content><![CDATA[%s]]></Content>"
+				+ "</xml>";
+		return String.format(format, toUserName, fromUserName, createTime, content);
 
 	}
 }
